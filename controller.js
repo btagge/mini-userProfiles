@@ -2,7 +2,11 @@ angular.module('userProfiles').controller('MainController', function($scope, mai
     
     $scope.thisAppIsBroken = "This angular app is working";
     $scope.getUsers = function() {
-        $scope.users = mainService.getUsers();
+        mainService.getUsers().then(function(response){
+            $scope.users = response.data.data;
+        }, function(error){
+            console.error(error);
+        });
     }
     
     $scope.getUsers();
